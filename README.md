@@ -1,1 +1,1 @@
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+Matchmakr aims to be a platform for video game enthusiasts who are looking to boost their skill to the next level. Find people near your ranking system, create teams and play together as a pre-made rather than dealing with randoms in PUB games.
