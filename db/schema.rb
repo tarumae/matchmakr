@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_102858) do
+ActiveRecord::Schema.define(version: 2021_05_07_110847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "dota_teams", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.integer "accept_limit"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_dota_teams_on_user_id"
+  end
+
+  create_table "team_memberships", force: :cascade do |t|
+    t.bigint "dota_team_id", null: false
+    t.bigint "user_id", null: false
+    t.string "role"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dota_team_id"], name: "index_team_memberships_on_dota_team_id"
+    t.index ["user_id"], name: "index_team_memberships_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,4 +47,7 @@ ActiveRecord::Schema.define(version: 2021_05_07_102858) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "dota_teams", "users"
+  add_foreign_key "team_memberships", "dota_teams"
+  add_foreign_key "team_memberships", "users"
 end

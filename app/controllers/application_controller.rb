@@ -8,7 +8,10 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def configure_permitted_parameters; end
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[ign rank pref_role pref_role2 region])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[ign rank pref_role pref_role2 region])
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
